@@ -1,9 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using MonkeyFinder.View;
 using MonkeyFinder.Services;
-
 namespace MonkeyFinder;
-
 public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
@@ -16,12 +14,16 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
             });
         builder.Services.AddSingleton<MonkeyService>();
+
         builder.Services.AddSingleton<MonkeysViewModel>();
+        builder.Services.AddTransient<MonkeyDetailsViewModel>();
+
+        builder.Services.AddSingleton<MainPage>();
+        builder.Services.AddTransient<DetailsPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
-
         builder.Services.AddSingleton<MainPage>();
         return builder.Build();
     }
