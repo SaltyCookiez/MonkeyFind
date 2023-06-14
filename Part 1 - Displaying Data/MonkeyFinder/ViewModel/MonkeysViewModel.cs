@@ -5,6 +5,12 @@ public partial class MonkeysViewModel : BaseViewModel
     public ObservableCollection<Monkey> Monkeys { get; } = new();
     MonkeyService monkeyService;
 
+    //public Command GetMonkeysCommand { get;}
+    public MonkeysViewModel(MonkeyService monkeyService)
+    {
+        Title = "Monkey Finder";
+        this.monkeyService = monkeyService;
+    }
     [RelayCommand]
     async Task GetMonkeysAsync()
     {
@@ -39,10 +45,5 @@ public partial class MonkeysViewModel : BaseViewModel
             {
                 {"Monkey", monkey }
             });
-    }
-    public MonkeysViewModel(MonkeyService monkeyService)
-    {
-        Title = "Monkey Finder";
-        this.monkeyService = monkeyService;
     }
 }
