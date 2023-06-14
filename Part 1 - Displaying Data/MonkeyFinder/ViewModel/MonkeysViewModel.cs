@@ -28,12 +28,21 @@ public partial class MonkeysViewModel : BaseViewModel
         {
             IsBusy = false;
         }
-
+    }
+    [RelayCommand]
+    async Task GoToDetailsAsync(Monkey monkey)
+    {
+        if (monkey is null)
+            return;
+        await Shell.Current.GoToAsync($"{nameof(DetailsPage)}?id={monkey.Name}", true,
+            new Dictionary<string, object>
+            {
+                {"Monkey", monkey }
+            });
     }
     public MonkeysViewModel(MonkeyService monkeyService)
     {
         Title = "Monkey Finder";
         this.monkeyService = monkeyService;
     }
-
 }
